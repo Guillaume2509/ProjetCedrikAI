@@ -7,11 +7,11 @@ from sklearn.model_selection import train_test_split
 # Step 1: Load datasets for skin tones and windshield tints
 def load_dataset(file_path):
     # Assuming the dataset has RGB values and corresponding real-life attributes
-    data = np.loadtxt(file_path, delimiter=‘,’)
+    data = np.loadtxt(file_path, delimiter=',')
     return data[:, :3], data[:, 3]  # RGB, real values
 
-skin_tones_rgb, skin_tones_real = load_dataset(‘skin_tones_dataset.csv’)
-tints_rgb, tints_real = load_dataset(‘windshield_tints_dataset.csv’)
+skin_tones_rgb, skin_tones_real = load_dataset('skin_tones_dataset.csv')
+tints_rgb, tints_real = load_dataset('windshield_tints_dataset.csv')
 
 # Convert RGB to grayscale
 def rgb_to_grayscale(rgb):
@@ -35,7 +35,7 @@ def extract_skin_pixels(image_path):
     skin_pixels = image[100:200, 100:200].flatten()  # Adjust to actual region
     return skin_pixels
 
-cctv_skin_pixels = extract_skin_pixels(‘cctv_image.jpg’)
+cctv_skin_pixels = extract_skin_pixels('cctv_image.jpg')
 
 # Step 4: Predict real-life skin tone
 def predict_skin_tone(cctv_pixels, skin_model, tint_model):
@@ -58,5 +58,5 @@ def calculate_confidence_interval(predictions, confidence=0.95):
 mean, lower, upper = calculate_confidence_interval(predicted_skin_tones)
 
 # Display results
-print(f "Predicted Skin Tone: {mean:.2f}")
-print(f "95% Confidence Interval: [{lower:.2f}, {upper:.2f}]")
+print(f"Predicted Skin Tone: {mean:.2f}")
+print(f"95% Confidence Interval: [{lower:.2f}, {upper:.2f}]")
